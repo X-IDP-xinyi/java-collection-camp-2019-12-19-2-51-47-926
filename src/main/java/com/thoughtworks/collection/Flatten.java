@@ -1,8 +1,9 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Flatten {
 
@@ -12,10 +13,11 @@ public class Flatten {
     }
 
     public List<Integer> transformToOneDimensional() {
-        throw new NotImplementedException();
+        return Stream.of(array).flatMap(Stream::of).collect(Collectors.toList());
     }
 
     public List<Integer> transformToUnrepeatedOneDimensional() {
-        throw new NotImplementedException();
+        List<Integer> result = Arrays.stream(array).flatMap(Stream::of).collect(Collectors.toList());
+        return result.stream().distinct().collect(Collectors.toList());
     }
 }
